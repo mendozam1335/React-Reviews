@@ -7,20 +7,31 @@ const App = () => {
   const [index, setIndex] = useState(0);
   const { name, job, text, image } = review[index];
 
-  const prevReview = () => {
-    if (index === 0) {
-      setIndex(review.length - 1);
-    } else {
-      setIndex(index - 1);
+  const checkNum = (number) => {
+    if (number < 0) {
+      return review.length - 1;
     }
+    if (number > review.length - 1) {
+      return 0;
+    }
+    return number;
+  };
+  const prevReview = () => {
+    const number = index - 1;
+    setIndex(checkNum(number));
   };
   const nextReview = () => {
-    index === review.length - 1 ? setIndex(0) : setIndex(index + 1);
+    const number = index + 1;
+    setIndex(checkNum(number));
   };
 
   const randReview = () => {
-    const newIndex = Math.floor(Math.random() * review.length);
-    setIndex(newIndex);
+    let newIndex = Math.floor(Math.random() * review.length);
+    if (newIndex === index) {
+      newIndex = newIndex + 1;
+    }
+
+    setIndex(checkNum(newIndex));
   };
   return (
     <main>
