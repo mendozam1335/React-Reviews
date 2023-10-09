@@ -5,6 +5,7 @@ import { FaLessThan, FaGreaterThan } from "react-icons/fa6";
 
 const App = () => {
   const [index, setIndex] = useState(0);
+  const { name, job, text, image } = review[index];
 
   const prevReview = () => {
     if (index === 0) {
@@ -23,14 +24,16 @@ const App = () => {
   };
   return (
     <main>
-      <div className="review">
+      <article className="review">
         <div className="img-container">
-          <img className="person-img" src={review[index].image} alt="" />
-          <BiSolidQuoteAltRight className="quote-icon" />
+          <img className="person-img" src={image} alt={name} />
+          <span className="quote-icon">
+            <BiSolidQuoteAltRight />
+          </span>
         </div>
-        <h4 className="author">{review[index].name}</h4>
-        <h5 className="job">{review[index].job}</h5>
-        <p className="info">{review[index].text}</p>
+        <h4 className="author">{name}</h4>
+        <h5 className="job">{job}</h5>
+        <p className="info">{text}</p>
         <div className="btn-container">
           <button className="prev-btn" onClick={prevReview}>
             <FaLessThan />
@@ -42,7 +45,7 @@ const App = () => {
         <button className="btn" onClick={randReview}>
           Suprise Me
         </button>
-      </div>
+      </article>
     </main>
   );
 };
